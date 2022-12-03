@@ -37,13 +37,13 @@
           $pasword = md5($pasword);
           include_once "admin/db_ecommerce.php";
           $con = mysqli_connect($host, $user, $pass, $db);
-          $query = "SELECT id,email,nombre from clientes where email='" . $email . "' and pass='" . $pasword . "';  ";
+          $query = "SELECT idClient,email, name name from client where email='" . $email . "' and pass='" . $pasword . "';  ";
           $res = mysqli_query($con, $query);
           $row = mysqli_fetch_assoc($res);
           if ($row) {
-            $_SESSION['idCliente'] = $row['id'];
+            $_SESSION['idCliente'] = $row['idClient'];
             $_SESSION['emailCliente'] = $row['email'];
-            $_SESSION['nombreCliente'] = $row['nombre'];
+            $_SESSION['nombreCliente'] = $row['name'];
             header("location: index.php?mensaje=Usuario registrado exitosamente");
           } else {
         ?>

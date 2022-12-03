@@ -44,9 +44,9 @@ $modulo=$_REQUEST['modulo']??'';
   
 
 
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.3/css/buttons.dataTables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.5.0/css/select.dataTables.min.css"/>
   <link rel="stylesheet" href="css/editor.dataTables.min.css">
 
 </head>
@@ -214,9 +214,9 @@ $modulo=$_REQUEST['modulo']??'';
 
 <!-- <script src="plugins/datatables/jquery.dataTables.js"></script>
 <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script> -->
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.3/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/select/1.5.0/js/dataTables.select.min.js"></script>
 <script src="js/dataTables.editor.min.js"></script>
 
 <script>
@@ -234,16 +234,16 @@ $modulo=$_REQUEST['modulo']??'';
         table: "#tablaProductos",
         fields: [ {
                 label: "Nombre:",
-                name: "nombre"
+                name: "name"
             }, {
                 label: "Precio:",
-                name: "precio"
+                name: "price"
             }, {
                 label: "Existencia:",
-                name: "existencia"
+                name: "available"
             }, {
                 label: "Imagenes:",
-                name: "files[].id",
+                name: "file[].id",
                 type: "uploadMany",
                 display: function ( fileId, counter ) {
                     return '<img src="'+editor.file( 'files', fileId ).web_path+'"/>';
@@ -257,11 +257,11 @@ $modulo=$_REQUEST['modulo']??'';
         dom: "Bfrtip",
         ajax: "controllers/productos.php",
         columns: [
-            { data: "nombre" },
-            { data: "precio", render: $.fn.dataTable.render.number( ',', '.', 0, '$' ) },
-            { data: "existencia" },
+            { data: "name" },
+            { data: "price", render: $.fn.dataTable.render.number( ',', '.', 0, '$' ) },
+            { data: "available" },
             {
-                data: "files",
+                data: "file",
                 render: function ( d ) {
                     return d.length ?
                         d.length+' imagen(es)' :

@@ -1,6 +1,6 @@
 <?php
 $id = mysqli_real_escape_string($con, $_REQUEST['id'] ?? '');
-$queryProducto = "SELECT id,nombre,precio,existencia FROM productos where id='$id';  ";
+$queryProducto = "SELECT * FROM product where idProduct='$id';  ";
 $resProducto = mysqli_query($con, $queryProducto);
 $rowProducto = mysqli_fetch_assoc($resProducto);
 ?>
@@ -9,21 +9,21 @@ $rowProducto = mysqli_fetch_assoc($resProducto);
     <div class="card-body">
         <div class="row">
             <div class="col-12 col-sm-6">
-                <h3 class="d-inline-block d-sm-none"><?php echo $rowProducto['nombre'] ?></h3>
+                <h3 class="d-inline-block d-sm-none"><?php echo $rowProducto['name'] ?></h3>
                 <?php
                 $queryImagenes = "SELECT 
-                f.web_path
+                f.filename
                 FROM
-                productos AS p
-                INNER JOIN productos_files AS pf ON pf.producto_id=p.id
-                INNER JOIN files AS f ON f.id=pf.file_id
-                WHERE p.id='$id';
+                product AS p
+                INNER JOIN productfile AS pf ON pf.idProduct=p.idProduct
+                INNER JOIN file AS f ON f.idFile=pf.idFile
+                WHERE p.idProduct='$id';
                 ";
                 $resPrimerImagen = mysqli_query($con, $queryImagenes);
                 $rowPrimerImaen=mysqli_fetch_assoc($resPrimerImagen);
                 ?>
                 <div class="col-12">
-                    <img src="<?php echo $rowPrimerImaen['web_path'] ?>" class="product-image">
+                    <img src="<?php echo "admin/images/product/".$rowPrimerImaen['filename'] ?>" class="product-image">
                 </div>
                 <div class="col-12 product-image-thumbs">
                     <?php
@@ -31,43 +31,43 @@ $rowProducto = mysqli_fetch_assoc($resProducto);
                     while ($rowImagenes = mysqli_fetch_assoc($resImagenes)) {
                     ?>
 
-                        <div class="product-image-thumb"><img src="<?php echo $rowImagenes['web_path'] ?>"></div>
+                        <div class="product-image-thumb"><img src="<?php echo "admin/images/product/".$rowImagenes['filename'] ?>"></div>
                     <?php
                     }
                     ?>
                 </div>
             </div>
             <div class="col-12 col-sm-6">
-                <h3 class="my-3"><?php echo $rowProducto['nombre'] ?></h3>
+                <h3 class="my-3"><?php echo $rowProducto['name'] ?></h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus sequi soluta in laborum! Fugit vero placeat quia sapiente iure cum, mollitia eligendi qui ipsam, quasi deleniti odit aut reprehenderit laudantium?</p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus sequi soluta in laborum! Fugit vero placeat quia sapiente iure cum, mollitia eligendi qui ipsam, quasi deleniti odit aut reprehenderit laudantium?</p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus sequi soluta in laborum! Fugit vero placeat quia sapiente iure cum, mollitia eligendi qui ipsam, quasi deleniti odit aut reprehenderit laudantium?</p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus sequi soluta in laborum! Fugit vero placeat quia sapiente iure cum, mollitia eligendi qui ipsam, quasi deleniti odit aut reprehenderit laudantium?</p>
 
                 <hr>
-                <h4>Existencias: <?php echo $rowProducto['existencia'] ?></h4>
+                <h4>Existencias: <?php echo $rowProducto['available'] ?></h4>
 
 
 
                 <div class="bg-gray py-2 px-3 mt-4">
                     <h2 class="mb-0">
-                        $<?php echo money_format("%i", $rowProducto['precio'])  ?>
+                        <?php echo $rowProducto['price'] ." €" ?>
                     </h2>
                 </div>
 
                 <div class="mt-4">
                     <button class="btn btn-primary btn-lg btn-flat" id="agregarCarrito" 
                     data-id="<?php echo $_REQUEST['id'] ?>"
-                    data-nombre="<?php echo $rowProducto['nombre'] ?>"
-                    data-web_path="<?php echo $rowPrimerImaen['web_path'] ?>"
-                    data-precio="<?php echo $rowProducto['precio'] ?>"
+                    data-nombre="<?php echo $rowProducto['name'] ?>"
+                    data-web_path="<?php echo "admin/images/product/".$rowPrimerImaen['filename'] ?>"
+                    data-precio="<?php echo $rowProducto['price'] ?>"
                     >
                         <i class="fas fa-cart-plus fa-lg mr-2"></i>
                         Add to Cart
                     </button>
                 </div>
                 <div class="mt-4">
-                    Catnidad
+                    Cantidad
                     <input type="number" class="form-control" id="cantidadProducto" value="1">
                 </div>
 

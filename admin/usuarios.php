@@ -3,7 +3,7 @@ include_once "db_ecommerce.php";
 $con = mysqli_connect($host, $user, $pass, $db);
 if(isset($_REQUEST['idBorrar'])){
     $id= mysqli_real_escape_string($con,$_REQUEST['idBorrar']??'');
-    $query="DELETE from usuarios  where id='".$id."';";
+    $query="DELETE from user  where idUser='".$id."';";
     $res=mysqli_query($con,$query);
     if($res){
         ?>
@@ -52,17 +52,17 @@ if(isset($_REQUEST['idBorrar'])){
                               </thead>
                               <tbody>
                                   <?php
-                                    $query = "SELECT id,email,nombre from usuarios;  ";
+                                    $query = "SELECT idUser,email, name from user;  ";
                                     $res = mysqli_query($con, $query);
 
                                     while ($row = mysqli_fetch_assoc($res)) {
                                     ?>
                                       <tr>
-                                          <td><?php echo $row['nombre'] ?></td>
+                                          <td><?php echo $row['name'] ?></td>
                                           <td><?php echo $row['email'] ?></td>
                                           <td>
-                                              <a href="panel.php?modulo=editarUsuario&id=<?php echo $row['id'] ?>" style="margin-right: 5px;"> <i class="fas fa-edit"></i> </a>
-                                              <a href="panel.php?modulo=usuarios&idBorrar=<?php echo $row['id'] ?>" class="text-danger borrar"> <i class="fas fa-trash"></i> </a>
+                                              <a href="panel.php?modulo=editarUsuario&id=<?php echo $row['idUser'] ?>" style="margin-right: 5px;"> <i class="fas fa-edit"></i> </a>
+                                              <a href="panel.php?modulo=usuarios&idBorrar=<?php echo $row['idUser'] ?>" class="text-danger borrar"> <i class="fas fa-trash"></i> </a>
                                           </td>
                                       </tr>
                                   <?php

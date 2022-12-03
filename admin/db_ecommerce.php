@@ -1,6 +1,6 @@
 <?php
     $host="localhost";
-    $user="eugenio";
-    $pass="123456";
-    $db="ecommerce";
+    $user="ce";
+    $pass="ce123456";
+    $db="ce";
 ?>

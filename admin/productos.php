@@ -22,15 +22,34 @@ $con = mysqli_connect($host, $user, $pass, $db);
                   <div class="card">
                       <!-- /.card-header -->
                       <div class="card-body">
-                          <table id="tablaProductos" class="table table-bordered table-hover">
+                          <table  class="table table-bordered table-hover">
                               <thead>
                                   <tr>
                                       <th>Nombre</th>
                                       <th>Precio</th>
                                       <th>Existencia</th>
-                                      <th>Imagen(es)</th>
                                   </tr>
                               </thead>
+                              <tbody>
+                                  <?php
+                                    $query = "SELECT name,available, price from product;  ";
+                                    $res = mysqli_query($con, $query);
+
+                                    while ($row = mysqli_fetch_assoc($res)) {
+                                    ?>
+                                      <tr>
+                                          <td><?php echo $row['name'] ?></td>
+                                          <td><?php echo $row['price'] ?></td>
+                                          <td><?php echo $row['available'] ?></td>
+                                          <td>
+                                              <a href="panel.php?modulo=editarUsuario&id=<?php echo $row['idUser'] ?>" style="margin-right: 5px;"> <i class="fas fa-edit"></i> </a>
+                                              <a href="panel.php?modulo=usuarios&idBorrar=<?php echo $row['idUser'] ?>" class="text-danger borrar"> <i class="fas fa-trash"></i> </a>
+                                          </td>
+                                      </tr>
+                                  <?php
+                                    }
+                                    ?>
+                              </tbody>
                           </table>
                       </div>
                       <!-- /.card-body -->

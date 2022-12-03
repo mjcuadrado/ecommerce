@@ -19,31 +19,31 @@ use
 	DataTables\Editor\ValidateOptions;
 
 // Build our Editor instance and process the data coming from _POST
-Editor::inst( $db, 'productos' )
+Editor::inst( $db, 'product' )
 	->fields(
-		Field::inst( 'nombre' )
+		Field::inst( 'name' )
 			->validator( Validate::notEmpty( ValidateOptions::inst()
 				->message( 'Debe de aingresar un nombre' )	
 			) ),
-		Field::inst( 'precio' )
+		Field::inst( 'price' )
 			->validator( Validate::numeric() )
 			->setFormatter( Format::ifEmpty(null) ),
-		Field::inst( 'existencia' )
+		Field::inst( 'available' )
 			->validator( Validate::numeric() )
 			->setFormatter( Format::ifEmpty(null) )
 	)
     ->join(
-        Mjoin::inst( 'files' )
-            ->link( 'productos.id', 'productos_files.producto_id' )
-            ->link( 'files.id', 'productos_files.file_id' )
+        Mjoin::inst( 'file' )
+            ->link( 'product.idProduct', 'productFile.IdProduct' )
+            ->link( 'file.idFile', 'productFile.idFile' )
             ->fields(
-                Field::inst( 'id' )
+                Field::inst( 'idProduct' )
                     ->upload( Upload::inst( $_SERVER['DOCUMENT_ROOT'].'/ecommerce/upload/__ID__.__EXTN__' )
-                        ->db( 'files', 'id', array(
+                        ->db( 'file', 'idFile', array(
                             'filename'    => Upload::DB_FILE_NAME,
                             'filesize'    => Upload::DB_FILE_SIZE,
-                            'web_path'    => Upload::DB_WEB_PATH,
-                            'system_path' => Upload::DB_SYSTEM_PATH
+                            'webPath'    => Upload::DB_WEB_PATH,
+                            'systemPath' => Upload::DB_SYSTEM_PATH
                         ) )
                         ->validator( Validate::fileSize( 5000000, 'Files must be smaller that 5M' ) )
                         ->validator( Validate::fileExtensions( array( 'webp','png', 'jpg', 'jpeg', 'gif' ), "Please upload an image" ) )

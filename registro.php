@@ -38,7 +38,7 @@
                     $pasword = md5($pasword);
                     include_once "admin/db_ecommerce.php";
                     $con = mysqli_connect($host, $user, $pass, $db);
-                    $query = "INSERT into clientes (nombre,email,pass) values ('$nombre','$email','$pasword')";
+                    $query = "INSERT into client (name,email,pass) values ('$nombre','$email','$pasword')";
                     $res = mysqli_query($con, $query);
                     if ($res) {
                     ?>

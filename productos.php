@@ -1,11 +1,31 @@
+<div class="col-md-12">
+    <p>Categorias: </p>
+    <a href="index.php?modulo=productos"  class="btn btn-primary">Todos</a>
+<?php
+$queryCat = "SELECT * FROM category;";
+    $resCat = mysqli_query($con, $queryCat);
+    while ($row = mysqli_fetch_assoc($resCat)) {
+        ?>
+        <a href="index.php?modulo=productos&categoria=<?php echo $row['idCategory'] ?>"  class="btn btn-primary"><?php echo $row['name'] ?></a>
+<?php
+    }
+?> 
+</div>
 <div class="row mt-1">
     <?php
     $where = " where 1=1 ";
     $nombre = mysqli_real_escape_string($con, $_REQUEST['nombre'] ?? '');
+
+    
+    $catSel = $_REQUEST['categoria'] ?? false;
+    if ($catSel) {
+        $where .= " and idCategory='$catSel' ";
+    }
+
     if (empty($nombre) == false) {
         $where = "and nombre like '%" . $nombre . "%'";
     }
-    $queryCuenta = "SELECT COUNT(*) as cuenta FROM productos  $where ;";
+    $queryCuenta = "SELECT COUNT(*) as cuenta FROM product  $where ;";
     $resCuenta = mysqli_query($con, $queryCuenta);
     $rowCuenta = mysqli_fetch_assoc($resCuenta);
     $totalRegistros = $rowCuenta['cuenta'];
@@ -24,17 +44,18 @@
     }
     $limite = " limit $inicioLimite,$elementosPorPagina ";
     $query = "SELECT 
-                        p.id,
-                        p.nombre,
-                        p.precio,
-                        p.existencia,
-                        f.web_path
+                        p.idProduct,
+                        p.name,
+                        p.price,
+                        p.available,
+                        f.webPath,
+                        f.filename
                         FROM
-                        productos AS p
-                        INNER JOIN productos_files AS pf ON pf.producto_id=p.id
-                        INNER JOIN files AS f ON f.id=pf.file_id
+                        product AS p
+                        INNER JOIN productfile AS pf ON pf.idProduct=p.idProduct
+                        INNER JOIN file AS f ON f.idFile=pf.idFile
                         $where
-                        GROUP BY p.id
+                        GROUP BY p.idProduct
                         $limite
                         ";
     $res = mysqli_query($con, $query);
@@ -42,12 +63,12 @@
     ?>
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card border-primary">
-                <img class="card-img-top img-thumbnail" src="<?php echo $row['web_path'] ?>" alt="">
+                <img class="card-img-top img-thumbnail" src="<?php echo "admin/images/product/".$row['filename'] ?>" alt="">
                 <div class="card-body">
-                    <h2 class="card-title"><strong><?php echo $row['nombre'] ?></strong></h2>
-                    <p class="card-text"><strong>Precio:</strong><?php echo $row['precio'] ?></p>
-                    <p class="card-text"><strong>Existencia:</strong><?php echo $row['existencia'] ?></p>
-                    <a href="index.php?modulo=detalleproducto&id=<?php echo $row['id'] ?>" class="btn btn-primary">Ver</a>
+                    <h2 class="card-title"><strong><?php echo $row['name'] ?></strong></h2>
+                    <p class="card-text"><strong>Precio:</strong><?php echo $row['price'] ?></p>
+                    <p class="card-text"><strong>Existencia:</strong><?php echo $row['available'] ?></p>
+                    <a href="index.php?modulo=detalleproducto&id=<?php echo $row['idProduct'] ?>" class="btn btn-primary">Ver</a>
                 </div>
             </div>
         </div>

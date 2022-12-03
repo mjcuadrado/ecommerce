@@ -30,11 +30,11 @@ $(document).ready(function () {
                     <td>
                         ${element['cantidad']}
                         <button type="button" class="btn-xs btn-primary mas" 
-                        data-id="${element['id']}"
+                        data-id="${element['idProduct']}"
                         data-tipo="mas"
                         >+</button>
                         <button type="button" class="btn-xs btn-danger menos" 
-                        data-id="${element['id']}"
+                        data-id="${element['idProduct']}"
                         data-tipo="menos"
                         >-</button>
                     </td>

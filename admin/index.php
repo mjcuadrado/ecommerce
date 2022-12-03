@@ -35,15 +35,16 @@
           $email = $_REQUEST['email'] ?? '';
           $pasword = $_REQUEST['pass'] ?? '';
           $pasword = md5($pasword);
+          echo $pasword;
           include_once "db_ecommerce.php";
           $con = mysqli_connect($host, $user, $pass, $db);
-          $query = "SELECT id,email,nombre from usuarios where email='" . $email . "' and pass='" . $pasword . "';  ";
+          $query = "SELECT * from user where email='" . $email . "' and pass='" . $pasword . "'; ";
           $res = mysqli_query($con, $query);
           $row = mysqli_fetch_assoc($res);
           if ($row) {
-            $_SESSION['id'] = $row['id'];
+            $_SESSION['id'] = $row['idUser'];
             $_SESSION['email'] = $row['email'];
-            $_SESSION['nombre'] = $row['nombre'];
+            $_SESSION['nombre'] = $row['name'];
             header("location: panel.php");
           } else {
         ?>
