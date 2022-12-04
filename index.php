@@ -30,7 +30,7 @@
 
 <body>
 <?php
-include_once "admin/db_ecommerce.php";
+include_once "admin/db.php";
 $con = mysqli_connect($host, $user, $pass, $db);
 ?>
     <div class="container">

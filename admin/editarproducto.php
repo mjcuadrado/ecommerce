@@ -1,5 +1,5 @@
 <?php
-include_once "db_ecommerce.php";
+include_once "db.php";
 $con = mysqli_connect($host, $user, $pass, $db);
 if (isset($_REQUEST['guardar'])) {
 
@@ -14,7 +14,7 @@ if (isset($_REQUEST['guardar'])) {
         ";
     $res = mysqli_query($con, $query);
     if ($res) {
-        echo '<meta http-equiv="refresh" content="0; url=panel.php?modulo=productos&mensaje=Producto '.$nombre.' editado exitosamente" />  ';
+        echo '<meta http-equiv="refresh" content="0; url=admin.php?modulo=productos&mensaje=Producto '.$nombre.' editado exitosamente" />  ';
     } else {
 ?>
         <div class="alert alert-danger" role="alert">
@@ -48,7 +48,7 @@ $row=mysqli_fetch_assoc($res);
                 <div class="card">
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form action="panel.php?modulo=editarProducto" method="post">
+                        <form action="admin.php?modulo=editarProducto" method="post">
                             <div class="form-group">
                                 <label>Nombre</label>
                                 <input type="text" name="nombre" class="form-control" value="<?php echo $row['name'] ?>" required="required" >

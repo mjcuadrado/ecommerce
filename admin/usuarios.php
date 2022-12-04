@@ -1,5 +1,5 @@
   <?php
-include_once "db_ecommerce.php";
+include_once "db.php";
 $con = mysqli_connect($host, $user, $pass, $db);
 if(isset($_REQUEST['idBorrar'])){
     $id= mysqli_real_escape_string($con,$_REQUEST['idBorrar']??'');
@@ -46,7 +46,7 @@ if(isset($_REQUEST['idBorrar'])){
                                       <th>Nombre</th>
                                       <th>Email</th>
                                       <th>Acciones
-                                          <a href="panel.php?modulo=crearUsuario"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                          <a href="admin.php?modulo=crearUsuario"><i class="fa fa-plus" aria-hidden="true"></i></a>
                                       </th>
                                   </tr>
                               </thead>
@@ -61,8 +61,8 @@ if(isset($_REQUEST['idBorrar'])){
                                           <td><?php echo $row['name'] ?></td>
                                           <td><?php echo $row['email'] ?></td>
                                           <td>
-                                              <a href="panel.php?modulo=editarUsuario&id=<?php echo $row['idUser'] ?>" style="margin-right: 5px;"> <i class="fas fa-edit"></i> </a>
-                                              <a href="panel.php?modulo=usuarios&idBorrar=<?php echo $row['idUser'] ?>" class="text-danger borrar"> <i class="fas fa-trash"></i> </a>
+                                              <a href="admin.php?modulo=editarUsuario&id=<?php echo $row['idUser'] ?>" style="margin-right: 5px;"> <i class="fas fa-edit"></i> </a>
+                                              <a href="admin.php?modulo=usuarios&idBorrar=<?php echo $row['idUser'] ?>" class="text-danger borrar"> <i class="fas fa-trash"></i> </a>
                                           </td>
                                       </tr>
                                   <?php

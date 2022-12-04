@@ -1,5 +1,5 @@
 <?php
-include_once "db_ecommerce.php";
+include_once "db.php";
 $con = mysqli_connect($host, $user, $pass, $db);
 if(isset($_REQUEST['idBorrar'])){
     $id= mysqli_real_escape_string($con,$_REQUEST['idBorrar']??'');
@@ -27,7 +27,7 @@ if(isset($_REQUEST['idBorrar'])){
           <div class="container-fluid">
               <div class="row mb-2">
                   <div class="col-sm-6">
-                      <h1>Ventas/h1>
+                      <h1>Ventas</h1>
                   </div>
               </div>
           </div><!-- /.container-fluid -->
@@ -63,7 +63,7 @@ if(isset($_REQUEST['idBorrar'])){
                                           <td><?php echo $row['name'] ?></td>
                                           <td><?php echo $row['total'] ?></td>
                                           <td>
-                                              <a href="panel.php?modulo=detalleventas&id=<?php echo $row['idOrder'] ?>" style="margin-right: 5px;"> <i class="fas fa-edit"></i> </a>
+                                              <a href="admin.php?modulo=detalleventas&id=<?php echo $row['idOrder'] ?>" style="margin-right: 5px;"> <i class="fas fa-edit"></i> </a>
                                           </td>
                                       </tr>
                                   <?php

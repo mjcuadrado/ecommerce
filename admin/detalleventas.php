@@ -1,5 +1,5 @@
 <?php
-include_once "db_ecommerce.php";
+include_once "db.php";
 $con = mysqli_connect($host, $user, $pass, $db);
 $id= mysqli_real_escape_string($con,$_REQUEST['id']??'');
 $query="SELECT o.`idOrder`, o.`date`, c.name, c.email, c.address FROM `order` o inner join client c on o.idClient = c.idClient where o.idOrder='".$id."'; ";
@@ -84,7 +84,7 @@ $row=mysqli_fetch_assoc($res);
 
                 <h3><?php echo "Total Pedido: ". $totalPedido?>€</h3>
 
-                <a href="panel.php?modulo=ventas" class="btn btn-primary"> Volver a pedidos </a>
+                <a href="admin.php?modulo=ventas" class="btn btn-primary"> Volver a pedidos </a>
             <!-- /.col -->
         </div>
         <!-- /.row -->

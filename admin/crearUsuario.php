@@ -1,6 +1,6 @@
 <?php
 if (isset($_REQUEST['guardar'])) {
-    include_once "db_ecommerce.php";
+    include_once "db.php";
     $con = mysqli_connect($host, $user, $pass, $db);
 
     $email = mysqli_real_escape_string($con, $_REQUEST['email'] ?? '');
@@ -13,7 +13,7 @@ if (isset($_REQUEST['guardar'])) {
         ";
     $res = mysqli_query($con, $query);
     if ($res) {
-        echo '<meta http-equiv="refresh" content="0; url=panel.php?modulo=usuarios&mensaje=Usuario creado exitosamente" />  ';
+        echo '<meta http-equiv="refresh" content="0; url=admin.php?modulo=usuarios&mensaje=Usuario creado exitosamente" />  ';
     } else {
 ?>
         <div class="alert alert-danger" role="alert">
@@ -43,7 +43,7 @@ if (isset($_REQUEST['guardar'])) {
                 <div class="card">
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form action="panel.php?modulo=crearUsuario" method="post">
+                        <form action="admin.php?modulo=crearUsuario" method="post">
                             <div class="form-group">
                                 <label>Email</label>
                                 <input type="email" name="email" class="form-control"  required="required" >

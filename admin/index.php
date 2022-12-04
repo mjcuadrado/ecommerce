@@ -36,7 +36,7 @@
           $pasword = $_REQUEST['pass'] ?? '';
           $pasword = md5($pasword);
           echo $pasword;
-          include_once "db_ecommerce.php";
+          include_once "db.php";
           $con = mysqli_connect($host, $user, $pass, $db);
           $query = "SELECT * from user where email='" . $email . "' and pass='" . $pasword . "'; ";
           $res = mysqli_query($con, $query);
@@ -45,7 +45,7 @@
             $_SESSION['id'] = $row['idUser'];
             $_SESSION['email'] = $row['email'];
             $_SESSION['nombre'] = $row['name'];
-            header("location: panel.php");
+            header("location: admin.php");
           } else {
         ?>
             <div class="alert alert-danger" role="alert">

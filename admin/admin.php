@@ -68,10 +68,10 @@ $modulo=$_REQUEST['modulo']??'';
       <ul class="navbar-nav ml-auto">
         <!-- Messages Dropdown Menu -->
         
-          <a class="nav-link" href="panel.php?modulo=editarUsuario&id=<?php echo $_SESSION['id']; ?>">
+          <a class="nav-link" href="admin.php?modulo=editarUsuario&id=<?php echo $_SESSION['id']; ?>">
             <i class="far fa-user"></i>
           </a>
-          <a class="nav-link text-danger" href="panel.php?modulo=&sesion=cerrar" title="Cerrar sesion" >
+          <a class="nav-link text-danger" href="admin.php?modulo=&sesion=cerrar" title="Cerrar sesion" >
             <i class="fas fa-door-closed    "></i>
           </a>
         
@@ -109,19 +109,19 @@ $modulo=$_REQUEST['modulo']??'';
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="panel.php?modulo=usuarios" class="nav-link <?php echo ($modulo=="usuarios" || $modulo=="crearUsuario" || $modulo=="editarUsuario" )?" active ":" "; ?>">
+                  <a href="admin.php?modulo=usuarios" class="nav-link <?php echo ($modulo=="usuarios" || $modulo=="crearUsuario" || $modulo=="editarUsuario" )?" active ":" "; ?>">
                     <i class="far fa-user nav-icon"></i>
                     <p>Usuarios</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="panel.php?modulo=productos" class="nav-link <?php echo ($modulo=="productos" )?" active ":" "; ?>">
+                  <a href="admin.php?modulo=productos" class="nav-link <?php echo ($modulo=="productos" )?" active ":" "; ?>">
                     <i class="fa fa-shopping-bag nav-icon" aria-hidden="true"></i>
                     <p>Productos</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="panel.php?modulo=ventas" class="nav-link <?php echo ($modulo=="ventas" )?" active ":" "; ?>">
+                  <a href="admin.php?modulo=ventas" class="nav-link <?php echo ($modulo=="ventas" )?" active ":" "; ?>">
                     <i class="fa fa-table nav-icon" aria-hidden="true"></i>
                     <p>Ventas</p>
                   </a>

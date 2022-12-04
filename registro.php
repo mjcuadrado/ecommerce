@@ -36,7 +36,7 @@
                     $nombre = $_REQUEST['nombre'] ?? '';
                     $pasword = $_REQUEST['pass'] ?? '';
                     $pasword = md5($pasword);
-                    include_once "admin/db_ecommerce.php";
+                    include_once "admin/db.php";
                     $con = mysqli_connect($host, $user, $pass, $db);
                     $query = "INSERT into client (name,email,pass) values ('$nombre','$email','$pasword')";
                     $res = mysqli_query($con, $query);

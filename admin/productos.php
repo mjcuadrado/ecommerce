@@ -1,5 +1,5 @@
 <?php
-include_once "db_ecommerce.php";
+include_once "db.php";
 $con = mysqli_connect($host, $user, $pass, $db);
   ?>
   <!-- Content Wrapper. Contains page content -->
@@ -42,8 +42,8 @@ $con = mysqli_connect($host, $user, $pass, $db);
                                           <td><?php echo $row['price'] ?></td>
                                           <td><?php echo $row['available'] ?></td>
                                           <td>
-                                              <a href="panel.php?modulo=editarProducto&id=<?php echo $row['idProduct'] ?>" style="margin-right: 5px;"> <i class="fas fa-edit"></i> </a>
-                                              <a href="panel.php?modulo=productos&idBorrar=<?php echo $row['idProduct'] ?>" class="text-danger borrar"> <i class="fas fa-trash"></i> </a>
+                                              <a href="admin.php?modulo=editarProducto&id=<?php echo $row['idProduct'] ?>" style="margin-right: 5px;"> <i class="fas fa-edit"></i> </a>
+                                              <a href="admin.php?modulo=productos&idBorrar=<?php echo $row['idProduct'] ?>" class="text-danger borrar"> <i class="fas fa-trash"></i> </a>
                                           </td>
                                       </tr>
                                   <?php
