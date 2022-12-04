@@ -31,7 +31,7 @@
                                 <i class="fa fa-cart-plus" aria-hidden="true"></i>
                                 <span class="badge badge-danger navbar-badge" id="badgeProducto"></span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" id="listaCarrito">
+                            <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right" id="listaCarrito">
 
                             </div>
                         </li>

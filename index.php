@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>My ecommerce by pn</title>
+    <title>PR1 mjcuadrado</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -73,10 +73,9 @@ $con = mysqli_connect($host, $user, $pass, $db);
     <script src="admin/plugins/daterangepicker/daterangepicker.js"></script>
     <!-- AdminLTE App -->
     <script src="admin/dist/js/adminlte.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="admin/dist/js/pages/dashboard.js"></script>
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="admin/js/stripe.js"></script>
+
+     <!-- <script src="https://js.stripe.com/v3/"></script>-->
+    <!-- <script src="admin/js/stripe.js"></script>-->
     <script src="admin/js/ecommerce.js"></script>
     
 </body>

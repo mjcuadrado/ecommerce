@@ -60,6 +60,7 @@ $rowProducto = mysqli_fetch_assoc($resProducto);
                     data-id="<?php echo $_REQUEST['id'] ?>"
                     data-nombre="<?php echo $rowProducto['name'] ?>"
                     data-web_path="<?php echo "admin/images/product/".$rowPrimerImaen['filename'] ?>"
+                    data-disponible="<?php echo $rowProducto['available']?>"
                     data-precio="<?php echo $rowProducto['price'] ?>"
                     >
                         <i class="fas fa-cart-plus fa-lg mr-2"></i>

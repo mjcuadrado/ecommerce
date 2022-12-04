@@ -14,13 +14,10 @@
     </table>
 
     <div class="form-row">
-        <h4 class="mt3">Datos de su tarjeta</h4>
-        <div id="card-element" class="form-control">
-            <!-- A Stripe Element will be inserted here. -->
+        <h4 class="mt3">Método de pago:</h4>
+        <div class="form-control">
+            <p>Ingreso en el IBAN: ES2820958297603648596978 </p>
         </div>
-
-        <!-- Used to display form errors. -->
-        <div id="card-errors" role="alert"></div>
     </div>
     <div class="mt-3">
         <h4>Terminos y condiciones</h4>

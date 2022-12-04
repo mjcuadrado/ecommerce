@@ -172,6 +172,12 @@ ALTER TABLE `order`
 ALTER TABLE `client`
   MODIFY `idClient` int(11) NOT NULL AUTO_INCREMENT;
 
+  --
+-- AUTO_INCREMENT de la tabla `ventas`
+--
+ALTER TABLE `order`
+  MODIFY `idOrder` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `detalleVentas`
 --

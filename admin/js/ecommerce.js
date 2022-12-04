@@ -18,7 +18,7 @@ $(document).ready(function () {
     function llenarTablaCarrito(response){
         $("#tablaCarrito tbody").text("");
         var TOTAL=0;
-        response.forEach(element => {
+        Array.from(response).forEach(element => {
             var precio=parseFloat(element['precio']);
             var totalProd=element['cantidad']*precio;
             TOTAL=TOTAL+totalProd;
@@ -30,16 +30,16 @@ $(document).ready(function () {
                     <td>
                         ${element['cantidad']}
                         <button type="button" class="btn-xs btn-primary mas" 
-                        data-id="${element['idProduct']}"
+                        data-id="${element['id']}"
                         data-tipo="mas"
                         >+</button>
                         <button type="button" class="btn-xs btn-danger menos" 
-                        data-id="${element['idProduct']}"
+                        data-id="${element['id']}"
                         data-tipo="menos"
                         >-</button>
                     </td>
-                    <td>$${precio.toFixed(2)}</td>
-                    <td>$${totalProd.toFixed(2)}</td>
+                    <td>${precio.toFixed(2)}€</td>
+                    <td>${totalProd.toFixed(2)}€</td>
                     <td><i class="fa fa-trash text-danger borrarProducto" data-id="${element['id']}" ></i></td>
                 <tr>
                 `
@@ -49,7 +49,7 @@ $(document).ready(function () {
             `
             <tr>
                 <td colspan="4" class="text-right"><strong>Total:</strong></td>
-                <td>$${TOTAL.toFixed(2)}</td>
+                <td>${TOTAL.toFixed(2)}€</td>
                 <td></td>
             <tr>
             `
@@ -66,7 +66,7 @@ $(document).ready(function () {
     function llenarTablaPasarela(response){
         $("#tablaPasarela tbody").text("");
         var TOTAL=0;
-        response.forEach(element => {
+        Array.from(response).forEach(element => {
             var precio=parseFloat(element['precio']);
             var totalProd=element['cantidad']*precio;
             TOTAL=TOTAL+totalProd;
@@ -134,11 +134,13 @@ $(document).ready(function () {
         var nombre=$(this).data('nombre');
         var web_path=$(this).data('web_path');
         var cantidad=$("#cantidadProducto").val();
+        var disponible=$(this).data('disponible');
         var precio=$(this).data('precio');
+
         $.ajax({
             type: "post",
             url: "ajax/agregarCarrito.php",
-            data: {"id":id,"nombre":nombre,"web_path":web_path,"cantidad":cantidad,"precio":precio},
+            data: {"id":id,"nombre":nombre,"web_path":web_path,"cantidad":cantidad,"precio":precio, "disponible":disponible},
             dataType: "json",
             success: function (response) {
                 llenaCarrito(response);
@@ -155,7 +157,7 @@ $(document).ready(function () {
             $("#badgeProducto").text("");
         }
         $("#listaCarrito").text("");
-        response.forEach(element => {
+        Array.from(response).forEach(element => {
             $("#listaCarrito").append(
                 `
                 <a href="index.php?modulo=detalleproducto&id=${element['id']}" class="dropdown-item">
@@ -205,7 +207,7 @@ $(document).ready(function () {
     var nombreRec=$("#nombreRec").val();
     var emailRec=$("#emailRec").val();
     var direccionRec=$("#direccionRec").val();
-    $("#jalar").click(function (e) { 
+    $("#recordar").click(function (e) { 
         var nombreCli=$("#nombreCli").val();
         var emailCli=$("#emailCli").val();
         var direccionCli=$("#direccionCli").val();
