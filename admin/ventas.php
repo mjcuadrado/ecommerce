@@ -1,6 +1,24 @@
 <?php
 include_once "db_ecommerce.php";
 $con = mysqli_connect($host, $user, $pass, $db);
+if(isset($_REQUEST['idBorrar'])){
+    $id= mysqli_real_escape_string($con,$_REQUEST['idBorrar']??'');
+    $query="DELETE from user  where idUser='".$id."';";
+    $res=mysqli_query($con,$query);
+    if($res){
+        ?>
+        <div class="alert alert-warning float-right" role="alert">
+            Usuario borrado con exito (no tienes corazon)
+        </div>
+        <?php
+    }else{
+        ?>
+        <div class="alert alert-danger float-right" role="alert">
+            Error al borrar <?php echo mysqli_error($con); ?>
+        </div>
+        <?php
+    }
+}
   ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -9,7 +27,7 @@ $con = mysqli_connect($host, $user, $pass, $db);
           <div class="container-fluid">
               <div class="row mb-2">
                   <div class="col-sm-6">
-                      <h1>Productos</h1>
+                      <h1>Ventas/h1>
                   </div>
               </div>
           </div><!-- /.container-fluid -->
@@ -22,28 +40,30 @@ $con = mysqli_connect($host, $user, $pass, $db);
                   <div class="card">
                       <!-- /.card-header -->
                       <div class="card-body">
-                          <table  class="table table-bordered table-hover">
+                          <table id="example2" class="table table-bordered table-hover">
                               <thead>
                                   <tr>
-                                      <th>Nombre</th>
-                                      <th>Precio</th>
-                                      <th>Existencia</th>
+                                      <th>Venta</th>
+                                      <th>Fecha</th>
+                                      <th>Cliente</th>
+                                      <th>Total</th>
+                                      <th>Detalle</th>
                                   </tr>
                               </thead>
                               <tbody>
                                   <?php
-                                    $query = "SELECT * from product;  ";
+                                    $query = "SELECT o.`idOrder`, o.`date`, c.name, sum(lo.subTotal) as total FROM `order` o inner join lineorder lo on o.idOrder=lo.idLineOrder inner join client c on o.idClient = c.idClient GROUP by o.idOrder order by date asc;  ";
                                     $res = mysqli_query($con, $query);
 
                                     while ($row = mysqli_fetch_assoc($res)) {
                                     ?>
                                       <tr>
+                                          <td><?php echo $row['idOrder'] ?></td>
+                                          <td><?php echo $row['date'] ?></td>
                                           <td><?php echo $row['name'] ?></td>
-                                          <td><?php echo $row['price'] ?></td>
-                                          <td><?php echo $row['available'] ?></td>
+                                          <td><?php echo $row['total'] ?></td>
                                           <td>
-                                              <a href="panel.php?modulo=editarProducto&id=<?php echo $row['idProduct'] ?>" style="margin-right: 5px;"> <i class="fas fa-edit"></i> </a>
-                                              <a href="panel.php?modulo=productos&idBorrar=<?php echo $row['idProduct'] ?>" class="text-danger borrar"> <i class="fas fa-trash"></i> </a>
+                                              <a href="panel.php?modulo=detalleventas&id=<?php echo $row['idOrder'] ?>" style="margin-right: 5px;"> <i class="fas fa-edit"></i> </a>
                                           </td>
                                       </tr>
                                   <?php

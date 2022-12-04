@@ -83,8 +83,7 @@ $modulo=$_REQUEST['modulo']??'';
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="#" class="brand-link">
-        <img src="dist/img/pn icono.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">My ecommerce</span>
+        <span class="brand-text font-weight-light">mjcuadrado - PR1</span>
       </a>
 
       <!-- Sidebar -->
@@ -109,12 +108,6 @@ $modulo=$_REQUEST['modulo']??'';
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="panel.php?modulo=estadisticas" class="nav-link <?php echo ($modulo=="estadisticas" || $modulo=="" )?" active ":" "; ?>">
-                    <i class="fas fa-chart-bar  nav-icon  "></i>
-                    <p>Estadisticas</p>
-                  </a>
-                </li>
                 <li class="nav-item">
                   <a href="panel.php?modulo=usuarios" class="nav-link <?php echo ($modulo=="usuarios" || $modulo=="crearUsuario" || $modulo=="editarUsuario" )?" active ":" "; ?>">
                     <i class="far fa-user nav-icon"></i>
@@ -151,23 +144,26 @@ $modulo=$_REQUEST['modulo']??'';
     </div>
     <?php
     }
-      if($modulo=="estadisticas" || $modulo==""){
-        include_once "estadisticas.php";
-      }
       if($modulo=="usuarios"){
         include_once "usuarios.php";
       }
       if($modulo=="productos"){
         include_once "productos.php";
       }
-      if($modulo=="ventas"){
+      if($modulo=="ventas" || $modulo==""){
         include_once "ventas.php";
+      }
+      if($modulo=="detalleventas" || $modulo==""){
+        include_once "detalleventas.php";
       }
       if($modulo=="crearUsuario"){
         include_once "crearUsuario.php";
       }
       if($modulo=="editarUsuario"){
         include_once "editarUsuario.php";
+      }
+      if($modulo=="editarProducto"){
+        include_once "editarProducto.php";
       }
       if($modulo=="productos"){
         include_once "productos.php";

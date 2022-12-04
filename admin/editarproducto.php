@@ -3,28 +3,28 @@ include_once "db_ecommerce.php";
 $con = mysqli_connect($host, $user, $pass, $db);
 if (isset($_REQUEST['guardar'])) {
 
-    $email = mysqli_real_escape_string($con, $_REQUEST['email'] ?? '');
-    $pass = md5(mysqli_real_escape_string($con, $_REQUEST['pass'] ?? ''));
     $nombre = mysqli_real_escape_string($con, $_REQUEST['nombre'] ?? '');
+    $existencia = mysqli_real_escape_string($con, $_REQUEST['existencia'] ?? '');
+    $precio = mysqli_real_escape_string($con, $_REQUEST['precio'] ?? '');
     $id = mysqli_real_escape_string($con, $_REQUEST['id'] ?? '');
 
-    $query = "UPDATE user SET
-        email='" . $email . "',password='" . $pass . "',name='" . $nombre . "'
-        where idUser='".$id."';
+    $query = "UPDATE product SET
+        name='" . $nombre . "',available='" . $existencia. "',price='" . $precio . "'
+        where idProduct='".$id."';
         ";
     $res = mysqli_query($con, $query);
     if ($res) {
-        echo '<meta http-equiv="refresh" content="0; url=panel.php?modulo=usuarios&mensaje=Usuario '.$nombre.' editado exitosamente" />  ';
+        echo '<meta http-equiv="refresh" content="0; url=panel.php?modulo=productos&mensaje=Producto '.$nombre.' editado exitosamente" />  ';
     } else {
 ?>
         <div class="alert alert-danger" role="alert">
-            Error al crear usuario <?php echo mysqli_error($con); ?>
+            Error al crear o editar el producto <?php echo mysqli_error($con); ?>
         </div>
 <?php
     }
 }
 $id= mysqli_real_escape_string($con,$_REQUEST['id']??'');
-$query="SELECT * from user where idUser='".$id."'; ";
+$query="SELECT * from product where idProduct='".$id."'; ";
 $res=mysqli_query($con,$query);
 $row=mysqli_fetch_assoc($res);
 ?>
@@ -35,7 +35,7 @@ $row=mysqli_fetch_assoc($res);
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Crear usuario</h1>
+                    <h1>Crear o editar Producto</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -48,21 +48,21 @@ $row=mysqli_fetch_assoc($res);
                 <div class="card">
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <form action="panel.php?modulo=editarUsuario" method="post">
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" name="email" class="form-control" value="<?php echo $row['email'] ?>" required="required" >
-                            </div>
-                            <div class="form-group">
-                                <label>Pass</label>
-                                <input type="password" name="pass" class="form-control"  required="required" >
-                            </div>
+                        <form action="panel.php?modulo=editarProducto" method="post">
                             <div class="form-group">
                                 <label>Nombre</label>
-                                <input type="text" name="nombre" class="form-control" value="<?php echo $row['name'] ?>"  required="required" >
+                                <input type="text" name="nombre" class="form-control" value="<?php echo $row['name'] ?>" required="required" >
                             </div>
                             <div class="form-group">
-                                <input type="hidden" name="id" value="<?php echo $row['idUser'] ?>" >
+                                <label>Existencia</label>
+                                <input type="number" name="existencia" class="form-control" value="<?php echo $row['available'] ?>"  required="required" >
+                            </div>
+                            <div class="form-group">
+                                <label>Precio</label>
+                                <input type="number" name="precio"  class="form-control" value="<?php echo $row['price'] ?>"  required="required" >
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" name="id" value="<?php echo $row['idProduct'] ?>" >
                                 <button type="submit" class="btn btn-primary" name="guardar">Guardar</button>
                             </div>
                         </form>
